@@ -20,69 +20,65 @@
             <hr>
             <h4 class="text-center mb-4">Book your table before they're all gone!</h4>
             <div class="container d-flex justify-content-around">
-                <a href="/reservation"><button class="btn btn-primary btn-lg" id="view"><span class="fa fa-table"></span> View Table</button></a>
-                <a href="/add"><button class="btn btn-danger btn-lg" id="add"><span class="fa fa-cutlery"></span> Make Reservation</button></a>
+                <a href="/reservation"><button class="btn btn-primary btn-lg" id="view"><span
+                            class="fa fa-table"></span> View Table</button></a>
+                <a href="/add"><button class="btn btn-danger btn-lg" id="add"><span class="fa fa-cutlery"></span> Make
+                        Reservation</button></a>
             </div>
         </div>
-            
+
 
 
         <!-- reservation input bar -->
         <!-- Name -->
-        <div id="resTable" class="div">
+        <form action="" method="post">
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-default">Table</span>
                 </div>
-                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                <input id="resTable" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
             </div>
             <!-- email -->
-            <div id="resName" class="input-group mb-3">
+            <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-default">Name</span>
                 </div>
-                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                <input id="resName" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
             </div>
-        </div>
-        <!-- phone # -->
-        <div id="resPhone" class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroup-sizing-default">Phone #</span>
+            <!-- phone # -->
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default">Phone #</span>
+                </div>
+                <input id="resPhone" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
             </div>
-            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-        </div>
-  
-    <!-- submit button -->
-        <input id="resSubmitButton" class="btn btn-primary" type="submit" value="Submit">
+
+            <!-- submit button -->
+            <input id="resSubmitButton" class="btn btn-primary" type="submit" value="Submit">
+        </form>
     </div>
-   
 
 
+    <script type="text/javascript">
+        // Question: What does this code do?
+        $("#resSubmitButton").on("click", function(event) {
+            event.preventDefault();
 
+            var newReservation = {
+                table: $("#resTable").val().trim(),
+                name: $("#resName").val().trim(),
+                phoneNumber: $("#resPhone").val().trim(),
+            };
 
-        <script type="text/javascript">
-            $("#search-btn").on("click", function() {
-                var searchedCharacter = $("#character-search").val().trim();
-
-                // Using a RegEx Pattern to remove spaces from searchedCharacter
-                // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
-                searchedCharacter = searchedCharacter.replace(/\s+/g, "").toLowerCase();
-
-                $.get("/api/characters/" + searchedCharacter, function(data) {
+            // Question: What does this code do??
+            $.post("/api/reservations", newReservation)
+                .then(function(data) {
                     console.log(data);
-                    if (data) {
-                        $("#stats").show();
-                        $("#name").text(data.name);
-                        $("#role").text(data.role);
-                        $("#age").text(data.age);
-                        $("#force-points").text(data.forcePoints);
-                    } else {
-                        $("#name").text("The force is not strong with this one. Your character was not found.");
-                        $("#stats").hide();
-                    }
+                    alert("Adding table...");
                 });
-            });
-        </script>
+
+        });
+    </script>
 
 </body>
 

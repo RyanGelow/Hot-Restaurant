@@ -17,13 +17,19 @@ app.use(express.json());
 // Reservation Data
 // =============================================================
 var Reservations = [{
-    table: "1",
-    name: "test",
-    phoneNumber: 911,
-    uniqueID: 900,
-}];
+        table: "1",
+        name: "test",
+        phoneNumber: 911,
+        uniqueID: 900,
+    },
+    {
+        table: "2",
+        name: "team",
+        phoneNumber: 311,
+        uniqueID: 42,
+    }
+];
 
-var waitingList = [];
 
 // Routes
 // =============================================================
@@ -69,6 +75,7 @@ const AddTable = function(table, name, phoneNumber) {
             uniqueID: Reservations.length,
             // auto generates a unique id per the reservations length
         }
+        return tableRes;
 
     }
     // Create New Reservations - takes in JSON input
@@ -76,18 +83,19 @@ app.post("/api/reservations", function(req, res) {
     // req.body hosts is equal to the JSON post sent from the user
     // This works because of our body parsing middleware
     var newReservation = req.body;
-
+    console.log(JSON.stringify(newReservation));
     // Using a RegEx Pattern to remove spaces from newCharacter
     // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
     newReservation.routeName = newReservation.name.replace(/\s+/g, "").toLowerCase();
 
     console.log(newReservation);
 
-    if (Reservations.length >= 5) {
-        waitingList.push(newReservation);
-    } else {
-        Reservations.push(newReservation);
-    }
+    Reservations.push(AddTable(newReservation.table, newReservation.name, newReservation.phoneNumber));
+    // if (Reservations.length >= 5) {
+    //     waitingList.push(newReservation);
+    // } else {
+    //     Reservations.push(newReservation);
+    // }
 
     res.json(newReservation);
 });

@@ -33,42 +33,73 @@
                         <h2><strong>Table Reservations</strong></h2>
                     </div>
                     <div class="card-body">
-                        <div class="card p-4">
-                            <h2 id="name">Daniel</h2>
+                        <div id="Cards" class="card p-4">
+                            <!-- <h2 id="name">Daniel</h2>
                             <div id="stats">
                                 <h3><strong>Table:</strong> <span id="table">Jedi</span></h3>
                                 <h3><strong>Phone Number:</strong> <span id="number">311</span></h3>
                                 <h3><strong>ID:</strong> <span id="id">123</span></h3>
-                            </div>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h2><strong>Wait List</strong></h2>
+                    </div>
+                    <div class="card-body">
+                        <div id="waitlist" class="card p-4">
+                            <!-- <h2 id="name">Daniel</h2>
+                                <div id="stats">
+                                    <h3><strong>Table:</strong> <span id="table">Jedi</span></h3>
+                                    <h3><strong>Phone Number:</strong> <span id="number">311</span></h3>
+                                    <h3><strong>ID:</strong> <span id="id">123</span></h3>
+                                </div> -->
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <script type="text/javascript">
-        $("#search-btn").on("click", function() {
-            var searReservation = $("#character-search").val().trim();
+        <script type="text/javascript">
+            $(document).on("ready", async function() {
 
-            // Using a RegEx Pattern to remove spaces from searReservation
-            // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
-            searReservation = searReservation.replace(/\s+/g, "").toLowerCase();
 
-            $.get("/api/reservations" + searReservation, function(data) {
-                console.log(data);
-                if (data) {
+                // Using a RegEx Pattern to remove spaces from searReservation
+                // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
+                //searReservation = searReservation.replace(/\s+/g, "").toLowerCase();
 
-                    $("#table").text(data.table);
-                    $("#name").text(data.role);
-                    $("#number").text(data.age);
-                    $("#ID").text(data.forcePoints);
-                } else {
-                    $("#name").text("No reservation found");
+                const response = await $.get("/api/reservations");
+                console.log(response);
+
+
+                const renderReservation = function(res) {
+
+                    for (key in res) {
+                        let newDiv = $("<div>");
+                        let name = $("<h3>");
+                        let table = $("<h3>");
+                        let phoneNumber = $("<h3>");
+                        let uniqueID = $("<h3>");
+                        let pagebreak = $("<br>");
+                        name.text(`NAME: ${response[key].name}`);
+                        table.text(`TABLE: ${response[key].table}`);
+                        phoneNumber.text(`PHONE NUMBER: ${response[key].phoneNumber}`);
+                        uniqueID.text(`UNIQUE ID: ${response[key].uniqueID}`);
+                        newDiv.append(name).append(table).append(phoneNumber).append(uniqueID)
+                            .append(pagebreak);
+                  
+                        if(key<5){
+                          console.log(key)
+                        $('#Cards').append(newDiv);
+                        }else{
+                          $('#waitlist').append(newDiv);
+                        }
+                    }
                 }
+                renderReservation(response);
             });
-        });
-    </script>
+        </script>
 
 </body>
 
