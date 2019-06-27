@@ -38,7 +38,7 @@ app.get("/add", function(req, res) {
 });
 
 app.get("/reservation", function(req, res) {
-    res.sendFile(path.join(__dirname, "display.html"));
+    res.sendFile(path.join(__dirname, "view.html"));
 });
 
 // Displays all reservations
@@ -61,7 +61,17 @@ app.get("/api/reservations/:name", function(req, res) {
     return res.json(false);
 });
 
-// Create New Reservations - takes in JSON input
+const AddTable = function(table, name, phoneNumber) {
+        tableRes = {
+            table: table,
+            name: name,
+            phoneNumber: phoneNumber,
+            uniqueID: Reservations.length,
+            // auto generates a unique id per the reservations length
+        }
+
+    }
+    // Create New Reservations - takes in JSON input
 app.post("/api/reservations", function(req, res) {
     // req.body hosts is equal to the JSON post sent from the user
     // This works because of our body parsing middleware
