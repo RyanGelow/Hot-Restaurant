@@ -24,41 +24,34 @@
             <a href="/all"><button class="btn btn-danger btn-lg"><span class="fa fa-plus"></span>Make Reservation</button></a>
         </div>
     </div>
-    <!-- <div class="row">
 
-      <div class="col-lg-12">
-
-        <div class="card mb-4">
-          <div class="card-header">
-            <h3><strong>Character Search</strong></h3>
-          </div>
-          <div class="card-body">
-            <input type="text" id="character-search" class="form-control">
-            <br>
-            <div class="text-right">
-              <button type="submit" class="btn btn-primary btn-md" id="search-btn"><span class="fa fa-search"></span> Search
-                Your Feelings. You know it is true.</button>
-
-            </div>
-          </div>
+    
+<!-- reservation input bar -->
+<!-- Name -->
+    <div id= "resTable" class="div">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroup-sizing-default">Table</span>
         </div>
-
-        <div class="card">
-          <div class="card-header">
-            <h3><strong>Character Statistics</strong></h3>
-          </div>
-          <div class="card-body">
-            <h2 id="name">Yoda</h2>
-            <div id="stats">
-              <h3><strong>Role:</strong> <span id="role">Jedi Master</span></h3>
-              <h3><strong>Age:</strong> <span id="age">900</span></h3>
-              <h3><strong>Force Points:</strong> <span id="force-points">2000</span></h3>
-            </div>
-          </div>
+        <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+      </div>
+      <!-- email -->
+      <div id= "resName" class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroup-sizing-default">Name</span>
         </div>
+        <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
       </div>
     </div>
-  </div> -->
+    <!-- phone # -->
+    <div id="resPhone" class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-default">Phone #</span>
+      </div>
+      <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+    </div>
+    
+   
 
   <script type="text/javascript">
     $("#search-btn").on("click", function() {
