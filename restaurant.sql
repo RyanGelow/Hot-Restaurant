@@ -10,7 +10,7 @@ USE restaurant_db;
 CREATE TABLE tables (
 
 -- id unique id for each table
-    id INT NOT NULL AUTO_INCREMENT,
+id INT NOT NULL AUTO_INCREMENT,
 
 -- reservation name
 reservationName VARCHAR(45) NOT NULL,
