@@ -22,7 +22,7 @@ phoneNumber INT(10) NOT NULL,
     PRIMARY KEY (id)
 );
 
--- add 10 different products
+-- add reservation
 INSERT INTO tables (reservationName, phoneNumber)
 VALUES("test", 911),
 ("table 2", 111);
