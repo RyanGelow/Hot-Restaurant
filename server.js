@@ -17,19 +17,7 @@ app.use(express.json());
 
 // Reservation Data
 // =============================================================
-var Reservations = [{
-        table: "1",
-        name: "test",
-        phoneNumber: 911,
-        uniqueID: 900,
-    },
-    {
-        table: "2",
-        name: "team",
-        phoneNumber: 311,
-        uniqueID: 42,
-    }
-];
+var Reservations = [];
 
 var StartConnection = async function(reservationName, phoneNumber, callback) {
     const connection = await mysql.createConnection({
@@ -70,6 +58,14 @@ const postToSql = async function(con, name, phoneNumber) {
     }
 }
 
+
+// to search for your table
+
+// enter your name
+// unique id?
+// pulls the rest
+
+
 // Routes
 // =============================================================
 
@@ -89,17 +85,25 @@ app.get("/reservation", function(req, res) {
 // Displays all reservations
 app.get("/api/reservations", async function(req, res) {
 
-    // GET method data before continuing
-    const response = await StartConnection("", "", query);
-    console.log(response[0]);
+    if (Reservations.length == 0) {
+        // GET method data before continuing
+        const response = await StartConnection("", "", query);
+
+        for (key in response[0]) {
+            Reservations.push(AddTable(response[0][key]['id'], response[0][key]['reservationName'], response[0][key]["phoneNumber"]))
+                // console.log(JSON.stringify(response[0]['reservationName']));
+        }
+    }
+    // console.log(Reservations);
     return res.json(Reservations);
+
 });
 
 // Displays a single reservation, or returns false
 app.get("/api/reservations/:name", function(req, res) {
     var chosen = req.params.name;
 
-    console.log(chosen);
+    // console.log(chosen);
 
     for (var i = 0; i < Reservations.length; i++) {
         if (chosen === Reservations[i].routeName) {
@@ -109,22 +113,32 @@ app.get("/api/reservations/:name", function(req, res) {
 
     return res.json(false);
 });
-
+//table constr
 const AddTable = function(table, name, phoneNumber) {
+    if (table = undefined) {
         tableRes = {
-            table: table,
+            id: Reservations.length,
             name: name,
             phoneNumber: phoneNumber,
-            uniqueID: Reservations.length,
-            // auto generates a unique id per the reservations length
+            uniqueID: Reservations.length
+                // auto generates a unique id per the reservations length
         }
-        StartConnection(name, phoneNumber, postToSql)
-            // runs post to sql when connection is made
-        return tableRes;
-        // returns above obj 
-
+    } else {
+        tableRes = {
+            id: table,
+            name: name,
+            phoneNumber: phoneNumber,
+            uniqueID: Reservations.length
+                // auto generates a unique id per the reservations length
+        }
     }
-    // Create New Reservations - takes in JSON input
+    return tableRes;
+    // returns above obj 
+
+}
+
+
+// Create New Reservations - takes in JSON input
 app.post("/api/reservations", function(req, res) {
     // req.body hosts is equal to the JSON post sent from the user
     // This works because of our body parsing middleware
@@ -137,11 +151,13 @@ app.post("/api/reservations", function(req, res) {
     console.log(newReservation);
 
     Reservations.push(AddTable(newReservation.table, newReservation.name, newReservation.phoneNumber));
-    // if (Reservations.length >= 5) {
-    //     waitingList.push(newReservation);
-    // } else {
-    //     Reservations.push(newReservation);
-    // }
+    StartConnection(newReservation.name, newReservation.phoneNumber, postToSql)
+        // runs post to sql when connection is made
+        // if (Reservations.length >= 5) {
+        //     waitingList.push(newReservation);
+        // } else {
+        //     Reservations.push(newReservation);
+        // }
 
     res.json(newReservation);
 });
