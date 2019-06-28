@@ -94,7 +94,7 @@ app.get("/api/reservations", async function(req, res) {
                 // console.log(JSON.stringify(response[0]['reservationName']));
         }
     }
-    // console.log(Reservations);
+     console.log(Reservations);
     return res.json(Reservations);
 
 });
@@ -114,16 +114,7 @@ app.get("/api/reservations/:name", function(req, res) {
     return res.json(false);
 });
 //table constr
-const AddTable = function(table, name, phoneNumber) {
-    if (table = undefined) {
-        tableRes = {
-            id: Reservations.length,
-            name: name,
-            phoneNumber: phoneNumber,
-            uniqueID: Reservations.length
-                // auto generates a unique id per the reservations length
-        }
-    } else {
+const AddTable = function(table=Reservations.length+1, name, phoneNumber) {
         tableRes = {
             id: table,
             name: name,
@@ -131,7 +122,8 @@ const AddTable = function(table, name, phoneNumber) {
             uniqueID: Reservations.length
                 // auto generates a unique id per the reservations length
         }
-    }
+    //}
+    console.log(tableRes)
     return tableRes;
     // returns above obj 
 

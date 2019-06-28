@@ -58,6 +58,15 @@
         $("#resSubmitButton").on("click", function(event) {
             event.preventDefault();
 
+            let name = $("#resName").val().trim();
+            let num = $("#resPhone").val().trim();
+
+            if(name.length>45||num.length>10){
+                alert("name or phone number is too long");
+                return;
+            }
+
+
             var newReservation = {
                 name: $("#resName").val().trim(),
                 phoneNumber: $("#resPhone").val().trim(),

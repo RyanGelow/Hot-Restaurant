@@ -80,15 +80,11 @@
                         let name = $("<h3>");
                         let table = $("<h3>");
                         let phoneNumber = $("<h3>");
-                        let uniqueID = $("<h3>");
                         let pagebreak = $("<br>");
                         name.text(`NAME: ${response[key].name}`);
                         table.text(`TABLE: ${response[key].id}`);
                         phoneNumber.text(`PHONE NUMBER: ${response[key].phoneNumber}`);
-                        uniqueID.text(`UNIQUE ID: ${response[key].uniqueID}`);
-                        newDiv.append(name).append(table).append(phoneNumber).append(uniqueID)
-                            .append(pagebreak);
-
+                        newDiv.append(name).append(table).append(phoneNumber).append(pagebreak);
                         if (key < 5) {
                             console.log(key)
                             $('#Cards').append(newDiv);
