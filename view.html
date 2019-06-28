@@ -83,17 +83,17 @@
                         let uniqueID = $("<h3>");
                         let pagebreak = $("<br>");
                         name.text(`NAME: ${response[key].name}`);
-                        table.text(`TABLE: ${response[key].table}`);
+                        table.text(`TABLE: ${response[key].id}`);
                         phoneNumber.text(`PHONE NUMBER: ${response[key].phoneNumber}`);
                         uniqueID.text(`UNIQUE ID: ${response[key].uniqueID}`);
                         newDiv.append(name).append(table).append(phoneNumber).append(uniqueID)
                             .append(pagebreak);
-                  
-                        if(key<5){
-                          console.log(key)
-                        $('#Cards').append(newDiv);
-                        }else{
-                          $('#waitlist').append(newDiv);
+
+                        if (key < 5) {
+                            console.log(key)
+                            $('#Cards').append(newDiv);
+                        } else {
+                            $('#waitlist').append(newDiv);
                         }
                     }
                 }
