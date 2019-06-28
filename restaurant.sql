@@ -10,10 +10,7 @@ USE restaurant_db;
 CREATE TABLE tables (
 
 -- id unique id for each table
-    id INT NOT NULL AUTO_INCREMENT,
-
--- tablename
-tableName INT NOT NULL,
+id INT NOT NULL AUTO_INCREMENT,
 
 -- reservation name
 reservationName VARCHAR(45) NOT NULL,
@@ -26,8 +23,8 @@ phoneNumber INT(10) NOT NULL,
 );
 
 -- add reservation
-INSERT INTO tables (tableName, reservationName, phoneNumber)
-VALUES(1, "test", 911),
-(2, "table 2", 111);
+INSERT INTO tables (reservationName, phoneNumber)
+VALUES("test", 911),
+("table 2", 111);
 
 SELECT * FROM tables;
