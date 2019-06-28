@@ -25,3 +25,6 @@ phoneNumber INT(10) NOT NULL,
 -- add 10 different products
 INSERT INTO tables (reservationName, phoneNumber)
 VALUES("test", 911),
+("table 2", 111);
+
+SELECT * FROM tables;
