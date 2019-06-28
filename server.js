@@ -2,6 +2,7 @@
 // =============================================================
 var express = require("express");
 var path = require("path");
+var sql = require("mysql2");
 
 // Sets up the Express App
 // =============================================================
@@ -75,6 +76,7 @@ const AddTable = function(table, name, phoneNumber) {
             uniqueID: Reservations.length,
             // auto generates a unique id per the reservations length
         }
+
         return tableRes;
 
     }
